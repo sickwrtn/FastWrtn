@@ -39,6 +39,8 @@ if (localStorage.getItem(env.local_tag) == null){
     }))
 }
 
+debug("localStorage");
+
 const wrtn: interfaces.wrtn_api_class = new wrtn_api_class();
 
 //랭킹 플러스 필터링 함수
@@ -276,7 +278,6 @@ if (true==true){
 if (true==true){
     main(feed,menus,dropdown);
 }
-debug("localStorage");
 
 
 
