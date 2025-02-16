@@ -58,6 +58,6 @@ export function my(dropdown_class: interfaces.dropdown_class){
             }
             i++;
         }
-    },100)
+    })
     debug("my",0);
 }

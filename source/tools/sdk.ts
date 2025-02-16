@@ -6,7 +6,7 @@ import { getCookie } from "./functions";
 
 //Wrtn Api Control Class
 //캐챗
-export class my_struct{
+class my_struct implements interfaces.my_struct{
     json: interfaces.myCharacter;
     constructor(data: interfaces.myCharacter){
         this.json = data;
@@ -123,7 +123,7 @@ export class my_struct{
     }
   }
   
- export class character_struct {
+ class character_struct implements interfaces.character_struct{
     getHeader: RequestInit;
     postHeader: RequestInit;
     json: interfaces.character;
@@ -162,7 +162,7 @@ export class my_struct{
   }
   
   //메세지
-  export class message_struct {
+ class message_struct implements interfaces.message_struct{
     json: interfaces.message;
     constructor(data: interfaces.message){
         this.json = data;
@@ -193,7 +193,7 @@ export class my_struct{
   }
   
   //채팅방
-  export class chatroom_struct {
+  class chatroom_struct implements interfaces.chatroom_struct{
     getHeader: RequestInit;
     postHeader: RequestInit;
     json: interfaces.chatroom;
@@ -254,7 +254,7 @@ export class my_struct{
   }
   
   //메인 api class
-  export class wrtn_api_class {
+  export class wrtn_api_class implements interfaces.wrtn_api_class{
     getHeader: RequestInit;
     postHeader: RequestInit;
     constructor(){

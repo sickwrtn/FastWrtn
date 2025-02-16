@@ -2,14 +2,16 @@ import { wrtn_api_class } from "./tools/sdk";
 import { debug } from "./tools/debug";
 import { one_by_one_character_prompt, simulation_prompt, focus_on_important_cases_prompt} from "./.env/MAprompt";
 import * as requests from "./tools/requests";
+import * as tools from "./tools/functions";
 import * as frontHtml from "./.env/fronthtml";
 import * as env from "./.env/env";
 import * as interfaces from "./interface/interfaces";
+import { popup } from "./tools/popup";
 
 const wrtn: interfaces.wrtn_api_class = new wrtn_api_class();
 
 //페르소나 목록을 누를시
-function personaL_change(menus: interfaces.chatroom_menus_class,data: Array<interfaces.characterChatProfile>,personaL: any,personal_modal: any){
+function persona_modal_func(menus: interfaces.chatroom_menus_class,data: Array<interfaces.characterChatProfile>,personaL: any){
     var m_i = 0;
     for (const m of data) {
         if (`${m_i}` == personaL.id) {
@@ -19,41 +21,29 @@ function personaL_change(menus: interfaces.chatroom_menus_class,data: Array<inte
         }
         m_i++;
     }
-    var personaL_change_modal: any = document.createElement("modal");//페르소나 모달 팝업
-    personaL_change_modal.innerHTML = frontHtml.persona_modal_html;
-    personal_modal.setAttribute("style","position: relative !important;\n" +
-        "    z-index: 11 !important;") //이게 있어야 모달이 작동함
-    personal_modal.appendChild(personaL_change_modal.firstChild);
-    var personal_modal_name: any = document.getElementById("W_name"); //모달 내부 이름 textarea
-    personal_modal_name.value = name;
-    var personal_modal_info: any = document.getElementById("W_info"); //모달 내부 정보 textarea
-    personal_modal_info.value = information;
-    var personal_modal_Sbtn: any = document.getElementById("W_sumbit"); //모달 내부 등록 버튼
-    var personal_modal_Cbtn: any = document.getElementById("W_close"); //모달 내부 닫기 버튼
-    var personal_modal_x: any = document.getElementById("W_x"); //모달 내부 x버튼
+    const persona_popup = new popup("페르소나");
+    persona_popup.open();
+    var personal_modal_name = persona_popup.addTextarea("이름","나의 이름","캐릭터가 불러줄 나의 이름을 입력해 주세요",12); 
+    personal_modal_name.setValue(name);
+    var personal_modal_info = persona_popup.addTextarea("정보","성별,나이,외형 등","캐릭터가 기억할 나의 정보를 입력해주세요",100,100);
+    personal_modal_info.setValue(information);
     //모달 등록버튼을 눌렀을시
-    personal_modal_Sbtn.addEventListener("click",()=>{
+    persona_popup.setSumbit("등록",()=>{
         //모달의 내용을 조합해 페르소나 등록 및 대표프로필로 설정
-        var re = wrtn.setPersona(mpid,personal_modal_name.value,personal_modal_info.value,true);
+        var re = wrtn.setPersona(mpid,personal_modal_name.getValue(),personal_modal_info.getValue(),true);
         if (re.result == "SUCCESS"){
             alert("페르소나 등록 성공!");
-            personal_modal.childNodes.item(0).remove();
+            persona_popup.close();
             persona_change(menus);
         }
         else{
             alert("페르소나 등록 실패!");
-            personal_modal.childNodes.item(0).remove();
+            persona_popup.close();
         }
     })
-    //모달 내부 닫기버튼 눌렀을시
-    personal_modal_Cbtn.addEventListener("click",()=>{
-        personal_modal.childNodes.item(0).remove();
+    persona_popup.setClose("닫기",()=>{
+        persona_popup.close()
         debug("personal_modal_Cbtn",3);
-    })
-    //모달 내부 x버튼 눌렀을시
-    personal_modal_x.addEventListener("click",()=>{
-        personal_modal.childNodes.item(0).remove();
-        debug("personal_modal_x",3);
     })
     debug("personaL",3);
 }
@@ -244,7 +234,6 @@ export function AfterMemory_func(){
 
 //페르소나 버튼 누를시
 export function persona_change(menus){
-    var personal_modal: any = document.getElementById("web-modal");
     try{
         var data: Array<interfaces.characterChatProfile> = wrtn.getPersona();
         console.log(data);
@@ -276,10 +265,10 @@ export function persona_change(menus){
             personaL_p.textContent = datum.name;
         }
         personaL.setAttribute("id",`${c}`) //페르소나 요소 id 지정
-        personaL.addEventListener('click',() => personaL_change(menus,data,personaL,personal_modal));
+        personaL.addEventListener('click',() => persona_modal_func(menus,data,personaL));
         persona_div.appendChild(personaL);
         c++;
     }
-    menus.menu.appendChild(persona_div);
+    tools.insertAfter(menus.menu,menus.get(env.persona_name),persona_div);
     debug("persona",0);
 }

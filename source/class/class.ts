@@ -90,7 +90,7 @@ export class dropdown_class implements interfaces.dropdown_class{
     }
 }
 
-export class feed_class implements feed_class{
+export class feed_class implements interfaces.feed_class{
     item: Array<[string,interfaces.filter_character_list,boolean,interfaces.stopLine,interfaces.onStopped]>;
     constructor(){
         this.item = [];

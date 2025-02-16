@@ -233,11 +233,7 @@ export function chatroom(chatroom_menus_class: interfaces.chatroom_menus_class){
         const NBS_E: any = NS.cloneNode(true); // - 버튼
         const Cm: any = NBS.childNodes.item(0).childNodes.item(0); // + 버튼 svg
         const Cm_E:any = NBS_E.childNodes.item(0).childNodes.item(0); // - 버튼 svg
-        var personal_modal = document.createElement("div"); //모달팝업
-        personal_modal.setAttribute("id","web-modal");
-        document.body.appendChild(personal_modal); // body에 모달팝업 추가
         debug("chatroom",1);
-
         //유저노트 자동 요약 기능
         var km = setInterval(()=>{
             const usernote_modal = document.getElementsByClassName(env.usernoteModalClass).item(0);//유저노트 클릭시 생기는 모달 팝업

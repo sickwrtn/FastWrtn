@@ -329,6 +329,91 @@ export interface wrtn_api_class{
 }
 
 
+export interface popupElement {
+    /**
+     * label element
+     */
+    label: any;
+    /**
+     * textarea element
+     */
+    textarea: any;
+    /**
+     * element의 요소를 변경
+     * @param placeholder placeholder 을 변경
+     * @param textareaInformaition 라벨밑의 설명란
+     * @param maxlength 최대입력글자수
+     * @param height 높이
+     * @param width 너비
+     */
+    set(placeholder?: string,textareaInformaition?: string | null,maxlength?: number,height?:number,width?: number): void;
+    /**
+     * textarea.value 값 가져오기
+     * @returns 값
+     */
+    getValue(): string;
+    /**
+     * textarea.value 변경
+     * @param content 변경할 내용
+     */
+    setValue(content: string): void;
+}
+
+export interface popup {
+    /**
+     * web-modal 객체
+     */
+    modal: any;
+    /**
+     * top,middle,bottum ChildNode로 구성된 Element
+     */
+    tabs: any;
+    /**
+     * 모달팝업기준 제일 상단 제목과 x버튼 부분
+     */
+    top: any;
+    /**
+     * 모달팝업기준 중간의 textarea 및 label이 있는 부분
+     */
+    middle: any;
+    /**
+     * 모달팝업기준 닫기, 등록하기? 등이 있는 부분
+     */
+    bottum: any;
+    /**
+     * 모달팝업 띄우기
+     */
+    open(): void;
+    /**
+     * 모달팝업 닫기
+     */
+    close(): void;
+    /**
+     * 모달팝업의 등록(name으로 지정) 버튼 부분
+     * @param name 버튼 이름
+     * @param func 클릭시 실행될 함수
+     */
+    setSumbit(name: string, func: object);
+    /**
+     * 모달팝업의 x아이콘, 닫기(name으로 지정) 버튼 부분
+     * @param name 버튼 이름
+     * @param func 클릭시 실행될 함수
+     */
+    setClose(name: string, func: object)
+    /**
+     * label 및 textarea를 추가
+     * @param name label의 내용
+     * @param placeholder placeholder
+     * @param textareaInformaition 라벨밑의 정보란
+     * @param maxlength 최대입력글자수
+     * @param height 높이
+     * @param width 너비
+     * @returns 만들어진 Element를 popupElement 형태로 반환
+     */
+    addTextarea(name: string,placeholder?: string,textareaInformaition?: string | null,maxlength?: number,height?: number,width?: number): popupElement;
+}
+
+
 export interface ids {
     _id? : string;
     wrtnUid?: string;

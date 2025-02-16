@@ -6,6 +6,7 @@ import { persona_change,AfterMemory_func } from "./chatroom_funtions";
 import { wrtn_api_class } from "./tools/sdk";
 import { copyToClipboard,getClipboardTextModern } from "./tools/functions";
 import { main } from "./main";
+import { popup } from "./tools/popup";
 
 //로컬 스토리지 초기설정
 if (localStorage.getItem(env.local_saved_prompt) == null){

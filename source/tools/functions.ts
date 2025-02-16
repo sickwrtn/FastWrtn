@@ -10,7 +10,7 @@ export function getCookie(name): string | undefined {
 }
 
 // 클립보드의 텍스트를 가져오기
-export function getClipboardTextModern() {
+export function getClipboardTextModern(): Promise<string>{
     debug("getClipboardTextModern",0);
     return navigator.clipboard.readText(); // 붙여넣기
 }
@@ -21,8 +21,12 @@ export function copyToClipboard(text): void{
     debug("copyToClipboard",0);
 }
 
+export function insertAfter(referenceNode,targetNode, newNode): void{
+    referenceNode.insertBefore(newNode, targetNode.nextSibling);
+}
+
 //cursor
-export function load_in_cursor(cursor="",target_list,Target,method="",w_func){
+export function load_in_cursor(cursor="",target_list,Target,method="",w_func): boolean | void{
     /* /character/me response
     {
         "result":"SUCCESS",
