@@ -7,7 +7,7 @@ import { plus_modal_func } from "../core/feed";
 const wrtn: interfaces.wrtn_api_class = new wrtn_api_class();
 
 
-export class chatroom_menus_class {
+export class chatroom_menus_class implements interfaces.chatroom_menus_class{
     item: Array<[string,string,interfaces.onClickChatroom_menus,string]>;
     listeners: Array<any>;
     menu: any
@@ -70,7 +70,7 @@ function myDropdown(tipbar: any,tipbar_struct_I: any,textContent: string,selecte
 }
 
 //character/my dropdown 클래스
-export class dropdown_class {
+export class dropdown_class implements interfaces.dropdown_class{
     item: Array<[string,interfaces.onClickDropdown]>;
     constructor(){
         this.item = [];
@@ -90,7 +90,7 @@ export class dropdown_class {
     }
 }
 
-export class feed_class {
+export class feed_class implements feed_class{
     item: Array<[string,interfaces.filter_character_list,boolean,interfaces.stopLine,interfaces.onStopped]>;
     constructor(){
         this.item = [];
