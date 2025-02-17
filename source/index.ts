@@ -4,7 +4,7 @@ import { debug } from "./tools/debug";
 import { chatroom_menus_class, dropdown_class, feed_class } from "./class/class";
 import { persona_change,AfterMemory_func } from "./chatroom_funtions";
 import { wrtn_api_class } from "./tools/sdk";
-import { copyToClipboard,getClipboardTextModern } from "./tools/functions";
+import { copyToClipboard,getClipboardTextModern, tag_block } from "./tools/functions";
 import { main } from "./main";
 import { popup } from "./tools/popup";
 
@@ -51,14 +51,8 @@ const filter_character_list = (CeCreator) => {return function(characterListEleme
     return false 시 비통과
     */
     //태그 검열
-    if (JSON.parse(localStorage.getItem(env.local_tag)).tags.length != 0){
-        for (var element of JSON.parse(localStorage.getItem(env.local_tag)).tags) {
-            for (var element2 of characterListElement.tags) {
-                if (element == element2){
-                    return false;
-                }   
-            }
-        }
+    if(tag_block(characterListElement)){
+        return false;
     }
     //기준 검열
     if (characterListElement.likeCount < env.likeCount_limit || characterListElement.chatCount < env.chatCount_limit){
@@ -97,14 +91,8 @@ const fastfood = (IsAdult) => {return function(characterListElement: interfaces.
     return false 시 비통과
     */
     //태그 검열
-    if (JSON.parse(localStorage.getItem(env.local_tag)).tags.length != 0){
-        for (var element of JSON.parse(localStorage.getItem(env.local_tag)).tags) {
-            for (var element2 of characterListElement.tags) {
-                if (element == element2){
-                    return false;
-                }   
-            }
-        }
+    if(tag_block(characterListElement)){
+        return false;
     }
     //기준 검열
     if (characterListElement.likeCount < 10 || characterListElement.chatCount < 10 || characterListElement.chatUserCount < 10){

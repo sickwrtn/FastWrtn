@@ -1,4 +1,5 @@
 import * as env from "../.env/env";
+import * as interfaces from "../interface/interfaces";
 import {debug} from "./debug";
 
 //쿠키 가져오는 함수
@@ -23,6 +24,19 @@ export function copyToClipboard(text): void{
 
 export function insertAfter(referenceNode,targetNode, newNode): void{
     referenceNode.insertBefore(newNode, targetNode.nextSibling);
+}
+
+export function tag_block(characterListElement: interfaces.character): boolean{
+    if (JSON.parse(localStorage.getItem(env.local_tag)).tags.length != 0){
+    for (var element of JSON.parse(localStorage.getItem(env.local_tag)).tags) {
+            for (var element2 of characterListElement.tags) {
+                if (element == element2){
+                    return true;
+                }   
+            }
+        }
+    }
+    return false;
 }
 
 //cursor
