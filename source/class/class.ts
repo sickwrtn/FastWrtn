@@ -9,8 +9,8 @@ const wrtn: interfaces.wrtn_api_class = new wrtn_api_class();
 
 export class chatroom_menus_class implements interfaces.chatroom_menus_class{
     item: Array<[string,string,interfaces.onClickChatroom_menus,string]>;
-    listeners: Array<any>;
-    menu: any
+    listeners: Array<HTMLButtonElement>;
+    menu: HTMLDivElement
     constructor(){
         this.item = [];
         this.listeners = [];
@@ -26,17 +26,17 @@ export class chatroom_menus_class implements interfaces.chatroom_menus_class{
         }
         return undefined
     }
-    apply(menu): void{
+    apply(menu: HTMLDivElement): void{
         this.menu = menu;
         for (const i of this.item){
-            const new_item = menu.childNodes.item(0).cloneNode(true);
+            const new_item = menu.childNodes.item(0).cloneNode(true) as HTMLButtonElement;
             new_item.childNodes.item(1).textContent = i[0];
             for (let i = 0; i < 4; i++) {
                 new_item.childNodes[0].childNodes[1].remove();
             }
-            new_item.childNodes[0].childNodes.item(0).setAttribute("d",i[1]);
+            (new_item.childNodes[0].childNodes.item(0) as HTMLElement).setAttribute("d",i[1]);
             if (i[3] != undefined){
-                new_item.childNodes[0].childNodes.item(0).setAttribute("fill",i[3]);
+                (new_item.childNodes[0].childNodes.item(0) as HTMLElement).setAttribute("fill",i[3]);
             }
             new_item.addEventListener('click',i[2]);
             this.listeners[this.listeners.length] = new_item;
@@ -45,7 +45,7 @@ export class chatroom_menus_class implements interfaces.chatroom_menus_class{
     }
 }
 
-function myDropdown(tipbar: any,tipbar_struct_I: any,textContent: string,selected: number,func: interfaces.onClickDropdown): void | true{
+function myDropdown(tipbar: HTMLCollectionOf<Element>,tipbar_struct_I: HTMLButtonElement,textContent: string,selected: number,func: interfaces.onClickDropdown): void | true{
     tipbar_struct_I.childNodes.item(0).textContent = textContent;
     tipbar_struct_I.addEventListener("click",()=> {
         console.log(selected);
@@ -78,10 +78,10 @@ export class dropdown_class implements interfaces.dropdown_class{
     add(name: string,funtion: interfaces.onClickDropdown): void{
         this.item[this.item.length] = [name,funtion]; 
     }
-    listen(tipbar: any,tipbar_struct: any,selected: number): void{
+    listen(tipbar: HTMLCollectionOf<Element>,tipbar_struct: HTMLButtonElement,selected: number): void{
         if (tipbar.item(0).childNodes.length < this.item.length + 2) {
             for (const element of this.item) {
-                const new_tipbar = tipbar_struct.cloneNode(true);
+                const new_tipbar = tipbar_struct.cloneNode(true) as HTMLButtonElement;
                 myDropdown(tipbar,new_tipbar,element[0],selected,(character: interfaces.myCharacter)=>{
                     element[1](character);
                 })

@@ -100,20 +100,20 @@ function load_character_func(cursorL: string,feed_struct_element: any,filter_cha
 
 //플러스 랭크 내부 캐릭터 클릭시 팝업
 export function plus_modal_func(Tfeed: any,filter_character_list: interfaces.filter_character_list,name:string ,CeCreator: boolean, stopLine?: interfaces.stopLine, onStopped?: interfaces.onStopped){
-    const feed_struct: any = Tfeed.childNodes.item(1).cloneNode(true); //피드의 제일위에서 2번째 요소를 가져와서 형식만 가져옴
-    const feed_struct_text: any = feed_struct.childNodes[0].childNodes[0].childNodes.item(0); //랭킹 플러스 (Fast wrtn) <- 이거 들어간 텍스트 구역
-    const feed_struct_scroll: any = feed_struct.childNodes[1].childNodes[0].childNodes.item(0); //스크롤 가져오기
-    const feed_struct_elements: any = feed_struct.childNodes[1].childNodes[0].childNodes[0].childNodes.item(0); //형식에 들어있던 캐챗 목록 가져오기
-    const feed_struct_element: any = feed_struct_elements.childNodes.item(0).cloneNode(true); //형식에 들어있던 캐챗중 제일 첫번째걸 형식 삼아 가져옴
+    const feed_struct = Tfeed.childNodes.item(1).cloneNode(true) as HTMLDivElement; //피드의 제일위에서 2번째 요소를 가져와서 형식만 가져옴
+    const feed_struct_text = feed_struct.childNodes[0].childNodes[0].childNodes.item(0) as HTMLTextAreaElement; //랭킹 플러스 (Fast wrtn) <- 이거 들어간 텍스트 구역
+    const feed_struct_scroll = feed_struct.childNodes[1].childNodes[0].childNodes.item(0) as HTMLDivElement; //스크롤 가져오기
+    const feed_struct_elements = feed_struct.childNodes[1].childNodes[0].childNodes[0].childNodes.item(0) as HTMLDivElement; //형식에 들어있던 캐챗 목록 가져오기
+    const feed_struct_element = feed_struct_elements.childNodes.item(0).cloneNode(true) as HTMLDivElement; //형식에 들어있던 캐챗중 제일 첫번째걸 형식 삼아 가져옴
     feed_struct_element.innerHTML = fronHtml.feed_struct_element_front_html;
     feed_struct_text.textContent = name;
     try {
-        var feed_struct_scroll_btn = feed_struct.childNodes[1].childNodes[0].childNodes[1].childNodes.item(0); // > 버튼
+        var feed_struct_scroll_btn = feed_struct.childNodes[1].childNodes[0].childNodes[1].childNodes.item(0) as HTMLButtonElement; // > 버튼
     }
     catch{
-        var feed_struct_scroll_btn = null;
+        var feed_struct_scroll_btn: HTMLButtonElement = null;
     }
-    const feed_struct_scroll_btn_l = document.createElement("div"); // < 버튼
+    const feed_struct_scroll_btn_l: HTMLDivElement = document.createElement("div"); // < 버튼
     debug("plus_modal_func",1);
     feed_struct_scroll_btn_l.setAttribute("width", "61px");
     feed_struct_scroll_btn_l.setAttribute("style", "    width: 61px;\n" +
@@ -124,7 +124,7 @@ export function plus_modal_func(Tfeed: any,filter_character_list: interfaces.fil
         "    z-index: 2;\n" +
         "    background: linear-gradient(90deg, rgb(26, 25, 24) 0%, rgba(26, 25, 24, 0) 100%);");
     feed_struct_scroll_btn_l.innerHTML = fronHtml.feed_front_html_scroll;
-    const feed_struct_six = feed_struct.childNodes[1].childNodes.item(0); // < 버튼.
+    const feed_struct_six = feed_struct.childNodes[1].childNodes.item(0) as HTMLDivElement; // < 버튼.
     // > 버튼 누를시
     if (feed_struct_scroll_btn != null){
         feed_struct_scroll_btn.addEventListener('click', () => {
@@ -147,9 +147,9 @@ export function plus_modal_func(Tfeed: any,filter_character_list: interfaces.fil
         }
         if (feed_struct_element.childNodes.length != 0) {
             if (feed_struct_elements.childNodes.item(0) != null){
-                if (feed_struct_elements.childNodes.item(0).id == "") {
-                    for (const feedStructElementElement of feed_struct_elements.childNodes) {
-                        if (feedStructElementElement.id == "") {
+                if ((feed_struct_elements.childNodes.item(0) as HTMLDivElement).id == "") {
+                    for (const feedStructElementElement of Array.from(feed_struct_elements.childNodes)) {
+                        if ((feedStructElementElement as HTMLDivElement).id == "") {
                             feedStructElementElement.remove();
                         }
                     }
@@ -161,15 +161,15 @@ export function plus_modal_func(Tfeed: any,filter_character_list: interfaces.fil
                         }}).then(res => res.json()).then(data => {
                             for (const element of data.data.characters) {
                                 if(function(){if (stopLine != undefined && onStopped != undefined) return filter_character_list(element, feed_struct_text);else return filter_character_list(element)}()){
-                                    const fe = feed_struct_element.cloneNode(true);
+                                    const fe = feed_struct_element.cloneNode(true) as HTMLDivElement;
                                     character_list[character_list.length] = element;
                                     if (fe.childNodes[0].childNodes[0].childNodes[0].childNodes.item(1) != null) {
                                         fe.childNodes[0].childNodes[0].childNodes[0].childNodes.item(1).remove();
                                     }
-                                    fe.setAttribute("id", loaded);
+                                    fe.setAttribute("id", String(loaded));
                                     fe.setAttribute("src", element._id)
                                     try {
-                                        fe.childNodes[0].childNodes[0].childNodes[0].childNodes.item(0).src = element.profileImage.w600;
+                                        (fe.childNodes[0].childNodes[0].childNodes[0].childNodes.item(0) as HTMLImageElement).src = element.profileImage.w600;
                                     } catch {
                                         console.log("image");
                                     }
@@ -190,8 +190,8 @@ export function plus_modal_func(Tfeed: any,filter_character_list: interfaces.fil
                                     }
                                     try {
                                         //팝업 이벤트 리스너
-                                        const fe_event_bar = fe.childNodes.item(0);
-                                        const fe_creator_event_bar = fe.childNodes.item(1);
+                                        const fe_event_bar = fe.childNodes.item(0) as HTMLDivElement;
+                                        const fe_creator_event_bar = fe.childNodes.item(1) as HTMLDivElement;
                                         fe_creator_event_bar.addEventListener('click',()=>{
                                             window.location.href = `https://wrtn.ai/character/profile/${character_list[fe.id].creator.wrtnUid}`;
                                         })
@@ -248,7 +248,7 @@ export function plus_modal_func(Tfeed: any,filter_character_list: interfaces.fil
 }
 
 //< > 스크롤 기능 구현
-function scroll_func(feed_struct_scroll,feed_struct_six, feed_struct_scroll_btn_l){
+function scroll_func(feed_struct_scroll: HTMLDivElement,feed_struct_six: HTMLDivElement, feed_struct_scroll_btn_l: HTMLDivElement){
     /*
     < > 버튼이 유동적으로 삭제될수있게끔 수정 해야함
     */
@@ -291,17 +291,17 @@ function scroll_func(feed_struct_scroll,feed_struct_six, feed_struct_scroll_btn_
     debug("scroll_func",0);
 }
 //제작자의 다른 캐릭터 보기 기능
-function plus_modal_recommand_creator_func(creator_character,plus_modal_recommand_creator,isModal){
+function plus_modal_recommand_creator_func(creator_character,plus_modal_recommand_creator: HTMLDivElement,isModal){
     //최상위 엘리먼트
-    const creator_character_top = plus_modal_recommand_creator.childNodes[1].childNodes.item(0);
+    const creator_character_top = plus_modal_recommand_creator.childNodes[1].childNodes.item(0) as HTMLDivElement;
     //캐챗엘리먼트 구조
-    const creator_character_struct = creator_character_top.childNodes.item(0);
+    const creator_character_struct = creator_character_top.childNodes.item(0) as HTMLDivElement;
     // < 버튼,캐챗,> 버튼 상위 엘리먼트
-    const creator_character_six = plus_modal_recommand_creator.childNodes.item(1);
+    const creator_character_six = plus_modal_recommand_creator.childNodes.item(1) as HTMLDivElement;
     // 스크롤 양
-    const creator_character_scroll = creator_character_six.childNodes.item(0);
+    const creator_character_scroll = creator_character_six.childNodes.item(0) as HTMLDivElement;
     // > 버튼
-    const creator_character_btn = creator_character_six.childNodes[1].childNodes.item(0);
+    const creator_character_btn = creator_character_six.childNodes[1].childNodes.item(0) as HTMLButtonElement;
     // < 버튼
     const creater_character_struct_scroll_btn_l = document.createElement("div"); // < 버튼
     debug("plus_modal_recommand_creator_func",1);
@@ -322,10 +322,10 @@ function plus_modal_recommand_creator_func(creator_character,plus_modal_recomman
     var i: number = 0;
     //내부에 캐릭터 삽입
     for (const element of creator_character) {
-        const creator_character_elment = creator_character_struct.cloneNode(true);
-        creator_character_elment.setAttribute("id",i);
+        const creator_character_elment = creator_character_struct.cloneNode(true) as HTMLDivElement;
+        creator_character_elment.setAttribute("id",String(i));
         creator_character_elment.setAttribute("src",element._id);
-        creator_character_elment.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes.item(0).src = element.profileImage.w600;
+        (creator_character_elment.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes.item(0) as HTMLImageElement).src = element.profileImage.w600;
         creator_character_elment.childNodes[0].childNodes[0].childNodes[1].childNodes.item(0).textContent = element.name;
         creator_character_elment.childNodes[0].childNodes[0].childNodes[1].childNodes.item(1).textContent = element.description;
         creator_character_elment.childNodes[0].childNodes[1].childNodes[1].textContent = element.creator.nickname;
@@ -350,9 +350,9 @@ function plus_modal_recommand_creator_func(creator_character,plus_modal_recomman
 }
 
 //팝업 내부의 업데이트와 댓글
-function date_and_comment(plus_modal_date_and_comment_struct,comment){
+function date_and_comment(plus_modal_date_and_comment_struct: HTMLDivElement,comment){
     if (comment.writer.profileImage == undefined){
-        var guest: any = document.createElement('div');
+        var guest: any  = document.createElement('div');
         //프로필사진 없는 유저의 프로필사진 대용 svg
         guest.innerHTML = "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 25\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\" color=\"#85837dff\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M21.7968 14.4524C20.8644 19.0092 16.8325 22.437 12 22.437C11.6548 22.437 11.3137 22.4195 10.9776 22.3854C5.935 21.8733 2 17.6147 2 12.437C2 6.91416 6.47715 2.43701 12 2.43701C17.5228 2.43701 22 6.91416 22 12.437C22 13.1274 21.93 13.8014 21.7968 14.4524ZM16 9.43701C16 11.6462 14.2091 13.437 12 13.437C9.79086 13.437 8 11.6462 8 9.43701C8 7.22787 9.79086 5.43701 12 5.43701C14.2091 5.43701 16 7.22787 16 9.43701ZM18.5786 16.9904C17.1344 19.0731 14.7265 20.437 12 20.437C9.27351 20.437 6.86558 19.0731 5.42131 16.9903C5.79777 16.4264 6.28345 15.9604 6.86686 15.5891C8.2895 14.6837 10.1521 14.437 11.9999 14.437C13.8478 14.437 15.7104 14.6837 17.133 15.5891C17.7165 15.9604 18.2022 16.4264 18.5786 16.9904Z\" fill=\"currentColor\"></path></svg>";
         guest = guest.childNodes.item(0);
@@ -362,7 +362,7 @@ function date_and_comment(plus_modal_date_and_comment_struct,comment){
     }
     else{
         //모달에 뜨는 댓글의 이미지
-        plus_modal_date_and_comment_struct.childNodes[1].childNodes[1].childNodes[0].childNodes.item(0).src = comment.writer.profileImage.w200;
+        (plus_modal_date_and_comment_struct.childNodes[1].childNodes[1].childNodes[0].childNodes.item(0) as HTMLImageElement).src = comment.writer.profileImage.w200;
     }
     //댓글 내용
     plus_modal_date_and_comment_struct.childNodes[1].childNodes[1].childNodes.item(1).textContent = comment.content;
@@ -370,7 +370,7 @@ function date_and_comment(plus_modal_date_and_comment_struct,comment){
 }
 
 //modal 팝업 구역이 존재할시
-function plus_modal_yes(character_list,fe){
+function plus_modal_yes(character_list,fe: HTMLDivElement){
     //새로운 모달 팝업을 생성
     const plus_modal = document.createElement("div");
     plus_modal.setAttribute("id","web-modal");
@@ -383,7 +383,7 @@ function plus_modal_yes(character_list,fe){
 }
 
 //modal 팝업구역이 존재하지 않을시 (기능적 요소 포함)
-function plus_modal_no(isModal,character_list,fe){
+function plus_modal_no(isModal,character_list,fe: HTMLDivElement){
     //모달을 활성화 하는 css
     isModal.setAttribute("style","position: relative !important;z-index: 11 !important;");
     isModal.innerHTML = fronHtml.plus_modal_front_html;
@@ -394,19 +394,19 @@ function plus_modal_no(isModal,character_list,fe){
     const plus_modal_date_and_comment_struct: any = document.createElement('div');
     plus_modal_date_and_comment_struct.innerHTML = fronHtml.plus_modal_date_and_comment;
     //plus_modal_date_and_comment_struct,plus_modal_recommand_creator 삽입 위치
-    const plus_modal_main_struct = isModal.childNodes[0].childNodes[0].childNodes[0].childNodes.item(1);
+    const plus_modal_main_struct = isModal.childNodes[0].childNodes[0].childNodes[0].childNodes.item(1) as HTMLDivElement;
     //모달 내부 x 버튼
-    const plus_modal_x_btn = isModal.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes.item(1);
+    const plus_modal_x_btn = isModal.childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes.item(1) as HTMLButtonElement;
     //모달 내부 대화하기 버튼
-    const plus_modal_btn = isModal.childNodes[0].childNodes[0].childNodes[0].childNodes[3].childNodes.item(0);
+    const plus_modal_btn = isModal.childNodes[0].childNodes[0].childNodes[0].childNodes[3].childNodes.item(0) as HTMLButtonElement;
     //모달 내부 이미지
-    const plus_modal_img = isModal.childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].childNodes.item(0);
+    const plus_modal_img = isModal.childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].childNodes.item(0) as HTMLImageElement;
     //이미지 내부 좋아요 버튼
-    const plus_modal_img_likeCount = isModal.childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[1].childNodes.item(1);
+    const plus_modal_img_likeCount = isModal.childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[1].childNodes.item(1) as HTMLButtonElement;
     //모달 내부 캐릭터챗 제목
-    const plus_modal_title = isModal.childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[1].childNodes[0].childNodes[0].childNodes.item(0);
+    const plus_modal_title = isModal.childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[1].childNodes[0].childNodes[0].childNodes.item(0) as HTMLElement;
     //크레이터 버튼 이벤트 href
-    const plus_modal_creator_link = isModal.childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[1].childNodes[0].childNodes[0].childNodes.item(1);
+    const plus_modal_creator_link = isModal.childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[1].childNodes[0].childNodes[0].childNodes.item(1) as HTMLLinkElement;
     //크레이터 요소
     const plus_modal_creator = isModal.childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[1].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes.item(1);
     //크레이터 뱃지를 가리킴

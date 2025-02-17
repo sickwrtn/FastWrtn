@@ -2,8 +2,8 @@ import * as modalHtml from "../.env/modalHtml";
 import * as interfaces from "../interface/interfaces";
 
 class popupElement implements interfaces.popupElement {
-    label: any;
-    textarea: any
+    label: HTMLLabelElement;
+    textarea: HTMLTextAreaElement;
     constructor(label, textarea){
         this.label = label;
         this.textarea = textarea;
@@ -15,8 +15,8 @@ class popupElement implements interfaces.popupElement {
         }
         if (width != undefined) this.textarea.style.cssText += `width: ${width}px;`;
         if (height != undefined) this.textarea.style.cssText += `height: ${height}px;`;
-        if (placeholder != undefined) this.textarea.style.placeholder = placeholder;
-        if (maxlength != undefined) this.textarea.style.setAttribute("maxlength",maxlength);
+        if (placeholder != undefined) this.textarea.placeholder = placeholder;
+        if (maxlength != undefined) this.textarea.setAttribute("maxlength",String(maxlength));
     }
     getValue(): string {
         return this.textarea.value
@@ -27,18 +27,18 @@ class popupElement implements interfaces.popupElement {
 }
 
 export class popup implements interfaces.popup{
-    modal: any;
-    tabs: any;
-    top: any;
-    middle: any;
-    bottum: any;
+    modal: Element;
+    tabs: HTMLDivElement;
+    top: HTMLDivElement;
+    middle: HTMLDivElement;
+    bottum: HTMLDivElement;
     constructor(name: string){
-        this.modal = document.createElement("modal");
+        this.modal = document.createElement("modal") as Element;
         this.modal.innerHTML = modalHtml.basic;
-        this.tabs = this.modal.childNodes[0].childNodes[0].childNodes[0].childNodes.item(0);
-        this.top = this.tabs.childNodes.item(0);
-        this.middle = this.tabs.childNodes.item(1);
-        this.bottum = this.tabs.childNodes.item(2);
+        this.tabs = this.modal.childNodes[0].childNodes[0].childNodes[0].childNodes.item(0) as HTMLDivElement;
+        this.top = this.tabs.childNodes.item(0) as HTMLDivElement;
+        this.middle = this.tabs.childNodes.item(1) as HTMLDivElement;
+        this.bottum = this.tabs.childNodes.item(2) as HTMLDivElement;
         this.top.childNodes.item(0).textContent = name;
     }
     open(): void{
@@ -48,13 +48,13 @@ export class popup implements interfaces.popup{
     close(): void{
         this.modal.remove();
     }
-    setSumbit(name: string,func: object): void{
+    setSumbit(name: string,func: EventListener): void{
         this.bottum.childNodes[1].childNodes.item(0).textContent = name;
         if (func != undefined){
             this.bottum.childNodes.item(1).addEventListener('click',func);
         }
     }
-    setClose(name: string,func: object): void{
+    setClose(name: string,func:EventListener): void{
         this.bottum.childNodes[0].childNodes.item(0).textContent = name;
         if (func != undefined){
             this.bottum.childNodes.item(0).addEventListener('click',func);
@@ -64,8 +64,8 @@ export class popup implements interfaces.popup{
     addTextarea(name: string,placeholder?: string,textareaInformaition?: string | null,maxlength?: number,height?: number,width?: number): popupElement{
         var struct = document.createElement("div");
         struct.innerHTML += modalHtml.label + modalHtml.textarea
-        var new_label: any = struct.childNodes.item(0);
-        var new_textarea: any = struct.childNodes.item(1);
+        var new_label: any = struct.childNodes.item(0) as HTMLLabelElement;
+        var new_textarea: any = struct.childNodes.item(1) as HTMLTextAreaElement;
         new_label.childNodes.item(0).textContent = name;
         if (textareaInformaition != undefined){
             new_label.innerHTML += modalHtml.textareaInfo;

@@ -14,14 +14,14 @@ export function my(dropdown_class: interfaces.dropdown_class){
     var selected: number = 0; //점 세개 퍼튼이 어떤 요소의 버튼인지 판별하는 번수
     var opend: boolean = false; //구원자
     setInterval(()=>{
-        var myTdiv: any = document.getElementsByClassName(env.threeDotButtonClass); //점 세개 버튼
-        var tipbar: any = document.getElementsByClassName(env.dropdownClass); //dropdown 목록
+        var myTdiv = document.getElementsByClassName(env.threeDotButtonClass); //점 세개 버튼
+        var tipbar = document.getElementsByClassName(env.dropdownClass); //dropdown 목록
         //드랍다운이 있는지 없는지
         if (tipbar != null){
-            var tipbar_struct: any = document.getElementsByClassName(env.dropdownListClass).item(0); //드랍다운 내부 요소 (형식용)
+            var tipbar_struct = document.getElementsByClassName(env.dropdownListClass).item(0) as HTMLButtonElement; //드랍다운 내부 요소 (형식용)
             //화이트 테마일시
             if (tipbar_struct == null){
-                tipbar_struct = document.getElementsByClassName(env.dropdownListClassWhite).item(0); //화이트 테마용 드랍다운 내부요소 (형식용)
+                tipbar_struct = document.getElementsByClassName(env.dropdownListClassWhite).item(0) as HTMLButtonElement; //화이트 테마용 드랍다운 내부요소 (형식용)
             }
             //드랍다운 내부에 copy to json, copy to paste, publish 추가
             if (tipbar_struct != null){
@@ -37,9 +37,9 @@ export function my(dropdown_class: interfaces.dropdown_class){
         }
         //모든 점세개에 클릭 이벤트리스너를 추가
         var i=0;
-        for (const myTdivElement of myTdiv) {
+        for (const myTdivElement of Array.from(myTdiv)) {
             if (myTdivElement.id == ""){
-                myTdivElement.setAttribute("id",i)
+                myTdivElement.setAttribute("id",String(i))
                 myTdivElement.addEventListener('click',()=>{
                     var j: number=0;
                     var myTdiv2: any = document.getElementsByClassName(env.myCharactersClass);

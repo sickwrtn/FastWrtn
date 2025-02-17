@@ -1,7 +1,7 @@
 
 //#region 파라미터 함수 규격
 //#region chatroom_menus_class의 item: Array<[string,string,interfaces.onClickChatroom_menus,string]>
-export interface onClickChatroom_menus { 
+export interface onClickChatroom_menus extends EventListener{ 
     /**
      * 채팅방 메뉴의 기능을 눌렀을 경우 실행되는 함수
      * @param {chatroom_menus_class} menus 현재 등록되있는 메뉴들이 들어있는 클래스
@@ -333,11 +333,11 @@ export interface popupElement {
     /**
      * label element
      */
-    label: any;
+    label: HTMLLabelElement;
     /**
      * textarea element
      */
-    textarea: any;
+    textarea: HTMLTextAreaElement;
     /**
      * element의 요소를 변경
      * @param placeholder placeholder 을 변경
@@ -363,23 +363,23 @@ export interface popup {
     /**
      * web-modal 객체
      */
-    modal: any;
+    modal: Element;
     /**
      * top,middle,bottum ChildNode로 구성된 Element
      */
-    tabs: any;
+    tabs: HTMLDivElement;
     /**
      * 모달팝업기준 제일 상단 제목과 x버튼 부분
      */
-    top: any;
+    top: HTMLDivElement;
     /**
      * 모달팝업기준 중간의 textarea 및 label이 있는 부분
      */
-    middle: any;
+    middle: HTMLDivElement;
     /**
      * 모달팝업기준 닫기, 등록하기? 등이 있는 부분
      */
-    bottum: any;
+    bottum: HTMLDivElement;
     /**
      * 모달팝업 띄우기
      */
@@ -393,13 +393,13 @@ export interface popup {
      * @param name 버튼 이름
      * @param func 클릭시 실행될 함수
      */
-    setSumbit(name: string, func: object);
+    setSumbit(name: string, func: EventListener);
     /**
      * 모달팝업의 x아이콘, 닫기(name으로 지정) 버튼 부분
      * @param name 버튼 이름
      * @param func 클릭시 실행될 함수
      */
-    setClose(name: string, func: object)
+    setClose(name: string, func: EventListener)
     /**
      * label 및 textarea를 추가
      * @param name label의 내용
