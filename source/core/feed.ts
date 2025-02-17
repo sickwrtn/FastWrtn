@@ -492,7 +492,7 @@ export function character(feed_class: interfaces.feed_class){
     처음 들어가면 태그 반뜨 뭐 이런거 뜨잖아?
     그것들의 상위 엘리먼트임 정확하게는
         */
-    var Tfeed = document.getElementsByClassName(env.mainFeedClass).item(0); // 피드를 가져옴
+    var Tfeed = document.getElementsByClassName(env.mainFeedClass).item(0) as HTMLDivElement; // 피드를 가져옴
     // 랭킹 플러스 기준
     //랭킹 플러스
     if (Tfeed != null) {

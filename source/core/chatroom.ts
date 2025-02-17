@@ -247,7 +247,7 @@ export function chatroom(chatroom_menus_class: interfaces.chatroom_menus_class){
         window.addEventListener("keyup", keysReleased, false);
 
         //모든 메뉴 적용
-        chatroom_menus_class.apply(document.getElementsByClassName(env.chatroomMenuClass).item(0).childNodes[1].childNodes[0].childNodes[1]);
+        chatroom_menus_class.apply((document.getElementsByClassName(env.chatroomMenuClass).item(0).childNodes[1].childNodes[0].childNodes[1] as HTMLDivElement));
         // 단축버튼
         //+버튼 추가
         Cm.setAttribute("d","M 12 12 L 12 7 L 14 7 L 14 12 L 19 12 L 19 14 L 14 14 L 14 19 L 12 19 L 12 14 L 7 14 L 7 12 L 12 12");

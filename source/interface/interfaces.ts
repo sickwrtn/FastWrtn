@@ -55,11 +55,11 @@ export interface chatroom_menus_class {
     /**
      * 현재 채팅방 메뉴에 올라가있는 기능 리스트
      */
-    listeners: Array<any>;
+    listeners: Array<HTMLButtonElement>;
     /**
      * 채팅방 메뉴 Element
      */
-    menu: any;
+    menu: HTMLDivElement;
     /**
      * 채팅방 메뉴에 기능을 추가하는 함수
      * @param {string} name 추가할 메뉴의 이름
@@ -78,7 +78,7 @@ export interface chatroom_menus_class {
      * 실제로 적용시키는 함수
      * @param {any} menu 현재 메뉴 Element 
      */
-    apply(menu: any): void;
+    apply(menu: HTMLDivElement): void;
 }
 
 export interface dropdown_class {
@@ -98,7 +98,7 @@ export interface dropdown_class {
      * @param {any} tipbar_struct 양식용 드랍다운 Element
      * @param {number} selected 현재 몇번째 캐릭터를 선택중인지
      */
-    listen(tipbar: any,tipbar_struct: any,selected: number): void;
+    listen(tipbar: HTMLCollectionOf<Element>,tipbar_struct: HTMLButtonElement,selected: number): void;
 }
 
 export interface feed_class {
@@ -119,7 +119,7 @@ export interface feed_class {
      * 실제로 적용 시키는 함수
      * @param {any} Tfeed 피드 Element
      */
-    listen(Tfeed: any): void;
+    listen(Tfeed: HTMLDivElement): void;
 }
 
 export interface my_struct {
