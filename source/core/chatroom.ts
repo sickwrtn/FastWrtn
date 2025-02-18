@@ -256,7 +256,7 @@ export function chatroom(chatroom_menus_class: interfaces.chatroom_menus_class){
                     chatroom_textarea_text_white.style.cssText = css.ChatBarText
                 }
                 const chatroom_textarea_text_p = document.getElementsByClassName('css-izb7yb').item(0) as HTMLElement;
-                if (chatroom_textarea_text_p != null) chatroom_textarea_text_p.style.cssText = css.ChatBarText
+                if (chatroom_textarea_text_p != null) chatroom_textarea_text_p.style.cssText = css.ChatBarText;
                 const chatroom_menu = document.getElementsByClassName("css-3nlmbp").item(0) as HTMLDivElement;
                 if(chatroom_menu == null) {
                     const chatroom_menu_hidden = document.getElementsByClassName("css-1jh10ze").item(0) as HTMLDivElement;
@@ -289,8 +289,20 @@ export function chatroom(chatroom_menus_class: interfaces.chatroom_menus_class){
                 for (const i  of (Array.from(document.getElementsByClassName("css-1iz5lr1")) as Array<HTMLElement>)){
                     i.style.cssText = css.ChatCharacterText;
                 }
+                for (const i  of (Array.from(document.getElementsByClassName("css-ssrqv0")) as Array<HTMLElement>)){
+                    i.style.cssText = css.ChatCharacterTextInstar;
+                }
+                for (const i  of (Array.from(document.getElementsByClassName("css-q6mb20")) as Array<HTMLElement>)){
+                    i.style.cssText = css.ChatCharacterTextInTwostar;
+                }
                 for (const i  of (Array.from(document.getElementsByClassName("css-130mhiw")) as Array<HTMLElement>)){
                     i.style.cssText = css.ChatUserText;
+                }
+                for (const i  of (Array.from(document.getElementsByClassName("css-12gpcg1")) as Array<HTMLElement>)){
+                    i.style.cssText = css.ChatUserTextInstar;
+                }
+                for (const i  of (Array.from(document.getElementsByClassName("css-rthce9")) as Array<HTMLElement>)){
+                    i.style.cssText = css.ChatUserTextInTwostar;
                 }
                 for (const element of Object.keys(css)) {
                     if (element.includes(".")){
