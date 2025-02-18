@@ -18,12 +18,11 @@ export class chatroom_menus_class implements interfaces.chatroom_menus_class{
     add(name: string,svg: string,func: interfaces.onClickChatroom_menus,color?:string): void{
         this.item[this.item.length] = [name,svg,func,color];
     }
-    get(name: string): any | undefined{
+    get(name: string): HTMLButtonElement | undefined{
         for (const i of this.listeners) {
             if (i.childNodes.item(1).textContent == name){
                 return i
-            }
-        }
+            }       }
         return undefined
     }
     apply(menu: HTMLDivElement): void{

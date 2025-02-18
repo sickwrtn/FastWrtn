@@ -142,4 +142,10 @@ export const simulation_prompt: object = {
     },
     chat_log:null
 };
-debug("Memory Afterburner Prompt");
+
+try{
+  debug("Memory Afterburner Prompt");
+}
+catch{
+  console.log("[FAST WRTN][DEBUG] [No IsDebug] Memory Afterburner Prompt loaded");
+}

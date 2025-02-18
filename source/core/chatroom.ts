@@ -1,6 +1,7 @@
 import { wrtn_api_class } from "../tools/sdk";
 import * as env from "../.env/env";
 import * as interfaces from "../interface/interfaces";
+import * as tools from "../tools/functions";
 import {debug} from "../tools/debug";
 
 const wrtn: interfaces.wrtn_api_class = new wrtn_api_class();
@@ -225,6 +226,87 @@ export function chatroom(chatroom_menus_class: interfaces.chatroom_menus_class){
         var NS = document.getElementsByClassName(env.chatbarPointbuttonClass).item(0) as HTMLButtonElement; // 파란색 -> 버튼
         if (NS == null){
             NS = document.getElementsByClassName(env.chatbarPointbutton_inactiveClass).item(0) as HTMLButtonElement;
+        }
+        if (JSON.parse(localStorage.getItem(env.local_them)).css != null && JSON.parse(localStorage.getItem(env.local_them)).css != ""){
+            var cssApply = setInterval(()=>{
+                if (!document.URL.includes("/character/u/")){
+                    clearInterval(cssApply);
+                }
+                let css: any = tools.compileCss(JSON.parse(localStorage.getItem(env.local_them)).css);
+                const chatroom_chatarea = document.getElementsByClassName("css-1ah7q4v").item(0) as HTMLDivElement;
+                chatroom_chatarea.style.backgroundColor = "transparent"; 
+                const chatroom_footerWhite = document.getElementsByClassName("css-dorp2h").item(0) as HTMLDivElement;
+                const chatroom_footerDark = document.getElementsByClassName("css-1e3ks9w").item(0) as HTMLDialogElement;
+                if (chatroom_footerWhite != null){
+                    chatroom_footerWhite.style.background = "transparent"; 
+                }
+                else {
+                    chatroom_footerDark.style.background = "transparent"; 
+                }
+                const chatroom_bottumarea = document.getElementsByClassName("css-nl42z7").item(0) as HTMLDivElement;
+                if (chatroom_bottumarea != null)chatroom_bottumarea.style.cssText = css.ChatBackground;
+                const chatroom_textarea = document.getElementsByClassName("css-1e28b1b").item(0) as HTMLDivElement;
+                if (chatroom_textarea != null)chatroom_textarea.style.cssText = css.ChatBar;
+                const chatroom_textarea_text = document.getElementsByClassName("css-1ognqe").item(0) as HTMLDivElement;
+                if (chatroom_textarea_text != null) {
+                    chatroom_textarea_text.style.cssText = css.ChatBarText;
+                }
+                else{
+                    const chatroom_textarea_text_white = document.getElementsByClassName("css-1fzuctd").item(0) as HTMLDivElement;
+                    chatroom_textarea_text_white.style.cssText = css.ChatBarText
+                }
+                const chatroom_textarea_text_p = document.getElementsByClassName('css-izb7yb').item(0) as HTMLElement;
+                if (chatroom_textarea_text_p != null) chatroom_textarea_text_p.style.cssText = css.ChatBarText
+                const chatroom_menu = document.getElementsByClassName("css-3nlmbp").item(0) as HTMLDivElement;
+                if(chatroom_menu == null) {
+                    const chatroom_menu_hidden = document.getElementsByClassName("css-1jh10ze").item(0) as HTMLDivElement;
+                    if (chatroom_menu_hidden == null){
+                        const chatroom_menu_white = document.getElementsByClassName("css-1gqdld2").item(0) as HTMLDivElement;
+                        if (chatroom_menu_white == null){
+                            const chatroom_menu_hidden_white = document.getElementsByClassName("css-fm3cmg").item(0) as HTMLDivElement;
+                            chatroom_menu_hidden_white.style.cssText = css.ChatMenu;
+                        }
+                        else {
+                            chatroom_menu_white.style.cssText = css.ChatMenu;
+                        }
+                    }
+                    else{
+                        chatroom_menu_hidden.style.cssText = css.ChatMenu;
+                    }
+                }
+                else {
+                    chatroom_menu.style.cssText = css.ChatMenu;
+                }
+                for (const i  of (Array.from(document.getElementsByClassName("message-bubble css-1wmi91f")) as Array<HTMLElement>)){
+                    i.style.cssText = css.ChatCharacter;
+                }
+                for (const i  of (Array.from(document.getElementsByClassName("message-bubble css-1m1tbv5")) as Array<HTMLElement>)){
+                    i.style.cssText = css.ChatCharacterSuperchat;
+                }
+                for (const i  of (Array.from(document.getElementsByClassName("message-bubble css-1oikzkj")) as Array<HTMLElement>)){
+                    i.style.cssText = css.ChatUser;
+                }
+                for (const i  of (Array.from(document.getElementsByClassName("css-1iz5lr1")) as Array<HTMLElement>)){
+                    i.style.cssText = css.ChatCharacterText;
+                }
+                for (const i  of (Array.from(document.getElementsByClassName("css-130mhiw")) as Array<HTMLElement>)){
+                    i.style.cssText = css.ChatUserText;
+                }
+                for (const element of Object.keys(css)) {
+                    if (element.includes(".")){
+                        if (document.getElementsByClassName(element.replace(".","").replace("_"," ")) != null){
+                            for (const i of (Array.from(document.getElementsByClassName(element.replace(".","").replace("_"," "))) as Array<HTMLElement>)){
+                                i.style.cssText = css[element];
+                            }
+                        }
+                    }
+                    else if (element.includes("#")){
+                        console.log(element.replace("#","").replace("_"," "));
+                        const target = document.getElementById(element.replace("#","").replace("_"," ")) as HTMLElement;
+                        if (target != null) target.style.cssText = css[element];
+                    }
+                }
+            })
         }
         const NBS = NS.cloneNode(true) as HTMLButtonElement; // + 버튼
         const NBS_E = NS.cloneNode(true) as HTMLButtonElement; // - 버튼

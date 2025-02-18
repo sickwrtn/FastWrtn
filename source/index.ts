@@ -40,6 +40,13 @@ if (localStorage.getItem(env.local_tag) == null){
     }))
 }
 
+//테마 초기설정
+if (localStorage.getItem(env.local_them) == null){
+    localStorage.setItem(env.local_them,JSON.stringify({
+        css : ""
+    }))
+}
+
 debug("localStorage");
 
 const wrtn: interfaces.wrtn_api_class = new wrtn_api_class();
