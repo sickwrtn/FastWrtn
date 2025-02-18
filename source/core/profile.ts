@@ -77,19 +77,17 @@ export function debug_btn(){
                     const them = tag_modal.childNodes.item(0).cloneNode(true);
                     them.childNodes.item(1).textContent = "커스텀 테마";
                     them.addEventListener('click',()=>{
-                        const them_popup = new popup("테마 커스텀");
+                        const them_popup = new popup("커스텀 테마");
                         them_popup.open();
                         them_popup.setClose("닫기",()=>them_popup.close());
                         them_popup.setSumbit("적용", ()=>{
                             localStorage.setItem(env.local_them,JSON.stringify({
                                 css : css.getValue()
                             }));
-                            const result = tools.compileCss(css.getValue());
-                            console.log(result);
                             alert("css가 적용되었습니다!");
                             them_popup.close();
                         })
-                        const css = them_popup.addTextarea("css 코드","ChatBackground {\nbackground:green;\n}","원하는 css 스타일을 입력해주세요",undefined,300);
+                        const css = them_popup.addTextarea("Fast Css 코드","ChatBackground {\nbackground:green;\n}","원하는 Fast Css 스타일 코드을 입력해주세요. (css와 문법적 차이가 있습니다.)",undefined,300);
                         css.setValue(JSON.parse(localStorage.getItem(env.local_them)).css);
                     })
                     tag_modal.appendChild(tag_button);
