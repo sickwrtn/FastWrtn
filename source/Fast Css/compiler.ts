@@ -1,0 +1,31 @@
+export function compileCss(css : string): string{
+    let result = css.replace(/\n/g,"");
+    result = result.replace(/ChatTop/g,".css-6g3r0p");
+    result = result.replace(/ChatBackground/g,".css-nl42z7, .css-dfg942");
+    result = result.replace(/ChatBarText/g,".css-1ognqe, .css-1fzuctd, .css-izb7yb, .css-15vkk13");
+    result = result.replace(/ChatMenusButtonText/g,".css-15eskfn");
+    result = result.replace(/ChatMenusButtonWhite/g,".css-h3d181");
+    result = result.replace(/ChatMenusButtonDark/g,".css-k4ctzz");
+    result = result.replace(/ChatMenuNewstartSelectText/g,".css-12c3ers");
+    result = result.replace(/ChatMenuNewstartSelect/g,".css-c4o7wp");
+    result = result.replace(/ChatMenuNewstartButtonText/g,".css-18na997");
+    result = result.replace(/ChatMenuNewstartButton/g,".css-1rcb6gt");
+    result = result.replace(/ChatMenuNewstart/g,".css-dntxqc, .css-3qxgfb");
+    result = result.replace(/ChatMenus/g,".css-j7qwjs");
+    result = result.replace(/ChatMenuText/g,".css-uhb2yf");
+    result = result.replace(/ChatMenu/g,".css-3nlmbp, .css-1jh10ze, .css-fm3cmg, .css-1gqdld2");
+    result  = result.replace(/ChatBar/g,".css-1e28b1b, .css-1rvkdkw");
+    result = result.replace(/ChatCharacterTextInTwostar/g,".css-q6mb20");
+    result = result.replace(/ChatCharacterTextInstar/g,".css-ssrqv0");
+    result = result.replace(/ChatCharacterText/g,".css-1iz5lr1");
+    result = result.replace(/ChatCharacterRightspace/g,".css-yz8nv");
+    result = result.replace(/ChatCharacterSuperchat/g,".css-1wmi91f");
+    result = result.replace(/ChatCharacter/g,".css-1m1tbv5");
+    result = result.replace(/ChatUserTextInTwostar/g,"css-rthce9");
+    result = result.replace(/ChatUserTextInstar/g,"css-12gpcg1");
+    result = result.replace(/ChatUserText/g,".css-130mhiw");
+    result = result.replace(/ChatUser/g,".css-1oikzkj");
+    result = result.replace(/ChatSuperchat/g,".css-15z17ag");
+    result = result.replace(/Chat/g,".css-7ehegr");
+    return result;
+}

@@ -86,6 +86,7 @@ export function debug_btn(){
                             }));
                             alert("css가 적용되었습니다!");
                             them_popup.close();
+                            window.location.reload();
                         })
                         const css = them_popup.addTextarea("Fast Css 코드","ChatBackground {\nbackground:green;\n}","원하는 Fast Css 스타일 코드을 입력해주세요. (css와 문법적 차이가 있습니다.)",undefined,300);
                         css.setValue(JSON.parse(localStorage.getItem(env.local_them)).css);

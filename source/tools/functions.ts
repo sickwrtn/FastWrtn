@@ -40,51 +40,6 @@ export function tag_block(characterListElement: interfaces.character): boolean{
     return false;
 }
 
-function transformData(input) {
-    const output = [];
-  
-    for (let i = 0; i < input.length; i++) {
-      const currentArray = input[i];
-  
-      if (currentArray.length === 1) {
-        // 섹션만 있는 경우 다음 배열의 첫 번째 요소를 코드로 사용
-        if (i + 1 < input.length && input[i + 1].length > 0) {
-            output.push([currentArray[0], input[i + 1][0]]);
-            //사용한 code는 다음 반복문에서 제외하기 위해 빈 배열로 만들어준다.
-            input[i+1].shift();
-        } else {
-          // 섹션만 있고 다음에 코드가 없는 경우 (에러 처리 또는 기본값 설정 가능)
-          output.push([currentArray[0], ""]); // 빈 문자열을 코드 값으로 사용
-        }
-      } else if (currentArray.length === 2) {
-        // 섹션과 코드가 함께 있는 경우
-        output.push(currentArray);
-      }
-    }
-  
-    return output;
-  }
-  
-
-export function compileCss(css : string){
-    let s = css.split("\n").join("");
-    let s_f = s.split("{");
-    let m = [];
-    for (const element of s_f) {
-        m[m.length] = element.split("}");
-    }
-    let trans = transformData(m);
-    for (let index = 0; index < trans.length; index++) {
-        trans[index][0] = trans[index][0].replace(" ","");
-    }
-    trans.pop();
-    let result = {};
-    for (const i of trans) {
-        result[i[0]] = i[1];
-    }
-    return result;
-}
-
 //cursor
 export function load_in_cursor(cursor="",target_list,Target,method="",w_func): boolean | void{
     /* /character/me response

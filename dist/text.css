@@ -1,0 +1,146 @@
+@font-face {
+    font-family: 'SDSamliphopangche_Outline';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+ChatBackground{
+    background-image: url('https://i.imgur.com/Xi1w3Cl.gif');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+
+ChatMenu{
+    background-image:url('https://dszw1qtcnsa5e.cloudfront.net/community/20230722/46f9a025-c7e9-4560-ad9f-4c584e1f60c2/E955BB3030E6417B9830A5B2BBBD98D1.gif');
+    background-position: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+
+
+ChatBar{
+    background: rgba(30, 30, 40, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0_0_10px rgba(255, 255, 255, 0.2);
+
+}
+
+
+
+ChatBarText{
+    color: #e0e0e0;
+    font-size: 16px;
+    font-family: 'SDSamliphopangche_Outline' !important;
+
+}
+
+
+
+ChatCharacter,ChatUser{
+    background: rgba(50, 50, 50, 0.85);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0_0_10px rgba(255, 255, 255, 0.2);
+
+}
+
+ChatCharacterSuperchat{
+    background: rgba(0, 0, 50, 0.9);
+    border: 2px solid #0099ff;
+    box-shadow: 0_0_15px #0099ff;
+    padding: 20px;
+    border-radius: 12px;
+
+}
+
+ChatCharacterSuperchat:hover{
+    background: rgba(0, 0, 50, 0.9) !important;
+}
+
+ChatCharacter:hover{
+    background: rgba(50, 50, 50, 0.85) !important;
+}
+
+ChatCharacterText{
+    font-family: 'SDSamliphopangche_Outline';
+    font-size: 16px;
+    line-height: 1.5;
+    color: #ffffff;
+
+}
+
+
+
+ChatCharacterTextInstar{
+    background: rgba(255, 193, 7, 0.8);
+    color: black;
+    font-style: italic;
+    padding: 3px_6px;
+    border-radius: 5px;
+}
+
+
+
+ChatCharacterTextInTwostar{
+    background: rgba(255, 69, 58, 0.8);
+    color: white;
+    font-weight: bold;
+    padding: 3px_6px;
+    border-radius: 5px;
+}
+
+
+
+ChatUserTextInstar{
+    background: rgba(255, 193, 7, 0.8);
+    color: black;
+    font-style: italic;
+    padding: 3px_6px;
+    border-radius: 5px;
+
+}
+
+
+
+ChatUserTextInTwostar{
+    background: rgba(255, 69, 58, 0.8);
+    color: white;
+    font-weight: bold;
+    padding: 3px_6px;
+    border-radius: 5px;
+
+}
+
+ChatMenus {
+    background:url('https://i.pinimg.com/originals/3d/b4/e8/3db4e8d4eba167859caf93ea8265a16b.gif');
+    background-position: center;
+    opacity: 0.9;
+}
+
+ChatMenusButtonDark:hover {
+    background:rgba(223, 38, 158, 0.67);
+}
+ChatMenusButtonWhite:hover {
+    background:rgba(223, 38, 158, 0.67);
+}
+ChatMenuNewstart{
+    background:url('https://item.kakaocdn.net/do/14f49d0aa150772fbd4bdbfcd0bfa97cf43ad912ad8dd55b04db6a64cddaf76d');
+    background-position: center;
+    opacity: 0.9;
+}
+ChatMenusButtonText {
+    font-family: 'SDSamliphopangche_Outline' !important;
+}
+ChatMenuNewstartSelectText{
+    font-family: 'SDSamliphopangche_Outline' !important;
+}
+ChatMenuText{
+    font-family: 'SDSamliphopangche_Outline' !important;
+}
