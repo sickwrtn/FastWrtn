@@ -1,3 +1,5 @@
+// Array<["내장 태그","변경될 class name"]>
+
 export const compileKeywords: Array<[string,string]> = [
     ["ChatTopMainTitleText",".css-1nc12v8"],
     ["ChatTopMainTitle",".css-xhmj3v"],
