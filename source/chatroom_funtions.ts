@@ -7,6 +7,7 @@ import * as frontHtml from "./.env/fronthtml";
 import * as env from "./.env/env";
 import * as interfaces from "./interface/interfaces";
 import { popup } from "./tools/popup";
+import { compileNoNCss } from "./Fast Css/compiler";
 
 const wrtn: interfaces.wrtn_api_class = new wrtn_api_class();
 
@@ -271,4 +272,29 @@ export function persona_change(menus){
     }
     tools.insertAfter(menus.menu,menus.get(env.persona_name),persona_div);
     debug("persona",0);
+}
+
+export function custumThem():void {
+    const them_popup = new popup("커스텀 테마");
+    them_popup.open();
+    them_popup.setClose("닫기",()=>{
+        them_popup.close();
+        clearInterval(directEntry);
+    });
+    them_popup.setSumbit("적용", ()=>{
+        localStorage.setItem(env.local_them,JSON.stringify({
+            css : css.getValue()
+        }));
+        alert("css가 적용되었습니다!");
+        clearInterval(directEntry);
+        them_popup.close();
+        window.location.reload();
+    })
+    const css = them_popup.addTextarea("Fast Css 코드","ChatBackground {\nbackground:green;\n}","원하는 Fast Css 스타일 코드을 입력해주세요. (css와 문법적 차이가 있습니다.)",undefined,300);
+    css.setValue(JSON.parse(localStorage.getItem(env.local_them)).css);
+    const css2 = them_popup.addTextarea("compiled Fast Css","","유효성을 검사하세요!",undefined,300);
+    css2.textarea.setAttribute("disabled",null);
+    let directEntry = setInterval(()=>{
+        css2.setValue(compileNoNCss(css.getValue()));
+    })
 }

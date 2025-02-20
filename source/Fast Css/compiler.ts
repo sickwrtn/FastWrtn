@@ -10,3 +10,13 @@ export function compileCss(css : string): string{
     }
     return result;
 }
+
+export function compileNoNCss(css : string): string{
+    let result = css;
+    for (const i of compileKeywords) {
+        debug(`replaced ${i[0]} -> ${i[1]}`);
+        let target = new RegExp(i[0],"g");
+        result = result.replace(target,i[1]);
+    }
+    return result;
+}

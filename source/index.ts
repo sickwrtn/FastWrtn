@@ -2,12 +2,13 @@ import * as env from "./.env/env";
 import * as interfaces from "./interface/interfaces";
 import { debug } from "./tools/debug";
 import { chatroom_menus_class, dropdown_class, feed_class } from "./class/class";
-import { persona_change,AfterMemory_func } from "./chatroom_funtions";
+import { persona_change,AfterMemory_func, custumThem } from "./chatroom_funtions";
 import { wrtn_api_class } from "./tools/sdk";
 import { copyToClipboard,getClipboardTextModern, tag_block } from "./tools/functions";
 import { main } from "./main";
 import { popup } from "./tools/popup";
 import { cssApply } from "./Fast Css/apply";
+import { compileCss, compileNoNCss } from "./Fast Css/compiler";
 
 //로컬 스토리지 초기설정
 if (localStorage.getItem(env.local_saved_prompt) == null){
@@ -139,21 +140,8 @@ if (true==true){
     menus.add(env.AfterMemory_name,env.MemoryAfterbuner_svg_d,AfterMemory_func,"yellow");
 
     //커스텀 테마 기능 추가
-    menus.add(env.custumThem,env.custumThem_svg_d,()=>{
-        const them_popup = new popup("커스텀 테마");
-        them_popup.open();
-        them_popup.setClose("닫기",()=>them_popup.close());
-        them_popup.setSumbit("적용", ()=>{
-            localStorage.setItem(env.local_them,JSON.stringify({
-                css : css.getValue()
-            }));
-            alert("css가 적용되었습니다!");
-            them_popup.close();
-            window.location.reload();
-        })
-        const css = them_popup.addTextarea("Fast Css 코드","ChatBackground {\nbackground:green;\n}","원하는 Fast Css 스타일 코드을 입력해주세요. (css와 문법적 차이가 있습니다.)",undefined,300);
-        css.setValue(JSON.parse(localStorage.getItem(env.local_them)).css);
-    })
+    menus.add(env.custumThem,env.custumThem_svg_d,custumThem);
+    
     //페르소나 메뉴 추가
     menus.add(env.persona_name,env.persona_svg_d,() => persona_change(menus));
     //채팅방 메뉴에 새로운 기능을 추가할경우
