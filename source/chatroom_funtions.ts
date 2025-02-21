@@ -304,10 +304,17 @@ export function custumThem():void {
     css.setValue(JSON.parse(localStorage.getItem(env.local_them)).css);
     const css2 = them_popup.addTextarea("compiled Fast Css","","유효성을 검사하세요!",undefined,300);
     css2.textarea.setAttribute("disabled",null);
-    const check = them_popup.addCheck("DirectlyApply","Css 실시간 적용 (저장은 적용 버튼 눌러야함)",false);
+    const check = them_popup.addCheck("DirectlyApply","테마 제작자용 Css 실시간 적용 (저장은 적용 버튼 눌러야함, 성능 많이 잡아먹음)",false);
     check.setEventListener('click',()=>{
         if(check.getValue()){
             check.setValue(false);
+            if (document.getElementById("ThemCssInit") != null){
+                document.getElementById("ThemCssInit").remove();
+            }
+            if (document.getElementById("ThemCss") != null){
+                document.getElementById("ThemCss").remove();
+            }
+            cssNoIntervalApply();
         }
         else{
             check.setValue(true);
@@ -320,14 +327,5 @@ export function custumThem():void {
         if (check.getValue()){
             directCssApply(css.getValue());
         }
-        else{
-            if (document.getElementById("ThemCssInit") != null){
-                document.getElementById("ThemCssInit").remove();
-            }
-            if (document.getElementById("ThemCss") != null){
-                document.getElementById("ThemCss").remove();
-            }
-            cssNoIntervalApply();
-        }
-    },100)
+    },300)
 }
