@@ -26,7 +26,7 @@ class popupElement implements interfaces.popupElement {
     }
 }
 
-class popupCheckElement implements popupCheckElement{
+class popupCheckElement implements interfaces.popupCheckElement{
     check : HTMLDivElement;
     Event : [string,EventListener];
     constructor(check : HTMLDivElement){
