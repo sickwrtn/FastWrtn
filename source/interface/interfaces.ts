@@ -359,6 +359,29 @@ export interface popupElement {
     setValue(content: string): void;
 }
 
+export interface popupCheckElement {
+    /**
+     * checkBox div Element
+     */
+    check : HTMLDivElement;
+    /**
+     * 체크박스 설정
+     * @param name 이름
+     * @param informaition 설명
+     * @param is boolean
+     */
+    set(name: string,informaition: string,is?:boolean): void;
+    /**
+     * 체크박스 값 설정
+     * @param is boolean
+     */
+    setValue(is:boolean): void;
+    /**
+     * 체크박스 값 가져오기
+     */
+    getValue(): boolean;
+}
+
 export interface popup {
     /**
      * web-modal 객체
@@ -411,6 +434,13 @@ export interface popup {
      * @returns 만들어진 Element를 popupElement 형태로 반환
      */
     addTextarea(name: string,placeholder?: string,textareaInformaition?: string | null,maxlength?: number,height?: number,width?: number): popupElement;
+    /**
+     * checkBox를 추가
+     * @param name 이름
+     * @param informaition 정보 
+     * @param is boolean
+     */
+    addCheck(name: string,informaition: string,is:boolean): popupCheckElement;
 }
 
 

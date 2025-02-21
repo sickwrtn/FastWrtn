@@ -34,6 +34,7 @@ export const compileKeywords: Array<[string,string]> = [
     ["ChatUserTextInTwostar","css-rthce9"],
     ["ChatUserTextInstar","css-12gpcg1"],
     ["ChatUserText",".css-130mhiw"],
+    ["ChatUserBox",".css-1k5k8hb"],
     ["ChatUser",".css-1oikzkj"],
     ["SideMenusText",".css-9yvi50"],
     ["SideMenusExtIconInActive",".css-38wt0x"],

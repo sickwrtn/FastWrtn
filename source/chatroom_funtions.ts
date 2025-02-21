@@ -290,7 +290,7 @@ export function custumThem():void {
         them_popup.close();
         window.location.reload();
     })
-    const css = them_popup.addTextarea("Fast Css 코드","ChatBackground {\nbackground:green;\n}","원하는 Fast Css 스타일 코드을 입력해주세요. (css와 문법적 차이가 있습니다.)",undefined,300);
+    const css = them_popup.addTextarea("Fast Css 코드","ChatBackground {\nbackground:green;\n}\n주석은 /**/ 만 사용가능합니다.","원하는 Fast Css 스타일 코드을 입력해주세요. (css와 문법적 차이가 있습니다.)",undefined,300);
     css.setValue(JSON.parse(localStorage.getItem(env.local_them)).css);
     const css2 = them_popup.addTextarea("compiled Fast Css","","유효성을 검사하세요!",undefined,300);
     css2.textarea.setAttribute("disabled",null);

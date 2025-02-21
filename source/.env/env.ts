@@ -21,6 +21,7 @@ export const local_saved_prompt: string = "saved_prompt"; //로컬스토리지 �
 export const local_usernote: string = "usernote"; //로컬스토리지 유저노트용 캐챗방 id 저장 위치
 export const local_tag: string = "tags"; //로컬스토리지 태그 차단 키워드 저장 위치
 export const local_them: string = "them"; //테마 css 저장 위치;
+export const loacl_setting : string = "setting";
 export const token_key: string = "access_token"; //쿠키중 가져올 토큰값 (조회 및 수정용 토큰 정보를 수집하지 않음)
 
 //namespace

@@ -74,25 +74,44 @@ export function debug_btn(){
                             window.location.reload();
                         })
                     })
-                    const them = tag_modal.childNodes.item(0).cloneNode(true);
-                    them.childNodes.item(1).textContent = "커스텀 테마";
-                    them.addEventListener('click',()=>{
-                        const them_popup = new popup("커스텀 테마");
-                        them_popup.open();
-                        them_popup.setClose("닫기",()=>them_popup.close());
-                        them_popup.setSumbit("적용", ()=>{
-                            localStorage.setItem(env.local_them,JSON.stringify({
-                                css : css.getValue()
-                            }));
-                            alert("css가 적용되었습니다!");
-                            them_popup.close();
+                    var func_button = tag_modal.childNodes.item(0).cloneNode(true);
+                    func_button.childNodes.item(1).textContent = "Fast Wrtn 기능 설정";
+                    func_button.addEventListener('click',()=>{
+                        const func_popup = new popup("설정");
+                        func_popup.open();
+                        func_popup.setClose("닫기",()=>{
+                            func_popup.close();
+                        })
+                        func_popup.setSumbit("적용",()=>{
+                            localStorage.setItem(env.loacl_setting,JSON.stringify({
+                                plus:checkPlus.getValue(),
+                                fastfood:checkFastfood.getValue(),
+                            }))
+                            alert("설정이 적용되었습니다!");
+                            func_popup.close();
                             window.location.reload();
                         })
-                        const css = them_popup.addTextarea("Fast Css 코드","ChatBackground {\nbackground:green;\n}","원하는 Fast Css 스타일 코드을 입력해주세요. (css와 문법적 차이가 있습니다.)",undefined,300);
-                        css.setValue(JSON.parse(localStorage.getItem(env.local_them)).css);
+                        const checkPlus = func_popup.addCheck("랭킹 플러스","메인의 랭킹플러스 기능",JSON.parse(localStorage.getItem(env.loacl_setting)).plus);
+                        checkPlus.setEventListener('click',()=>{
+                            if(checkPlus.getValue()){
+                                checkPlus.setValue(false);
+                            }
+                            else{
+                                checkPlus.setValue(true);
+                            }
+                        })
+                        const checkFastfood = func_popup.addCheck("패스트푸드","메인의 패스트푸드 기능",JSON.parse(localStorage.getItem(env.loacl_setting)).fastfood);
+                        checkFastfood.setEventListener('click',()=>{
+                            if(checkFastfood.getValue()){
+                                checkFastfood.setValue(false);
+                            }
+                            else{
+                                checkFastfood.setValue(true);
+                            }
+                        })
                     })
                     tag_modal.appendChild(tag_button);
-                    tag_modal.appendChild(them);
+                    tag_modal.appendChild(func_button);
                 }
             }
         }

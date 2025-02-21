@@ -14,7 +14,6 @@ export function compileCss(css : string): string{
 export function compileNoNCss(css : string): string{
     let result = css;
     for (const i of compileKeywords) {
-        debug(`replaced ${i[0]} -> ${i[1]}`);
         let target = new RegExp(i[0],"g");
         result = result.replace(target,i[1]);
     }

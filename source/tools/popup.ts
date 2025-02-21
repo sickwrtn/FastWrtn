@@ -4,7 +4,7 @@ import * as interfaces from "../interface/interfaces";
 class popupElement implements interfaces.popupElement {
     label: HTMLLabelElement;
     textarea: HTMLTextAreaElement;
-    constructor(label, textarea){
+    constructor(label: HTMLLabelElement, textarea: HTMLTextAreaElement){
         this.label = label;
         this.textarea = textarea;
     }
@@ -24,6 +24,58 @@ class popupElement implements interfaces.popupElement {
     setValue(content: string): void{
         this.textarea.value = content;
     }
+}
+
+class popupCheckElement implements popupCheckElement{
+    check : HTMLDivElement;
+    Event : [string,EventListener];
+    constructor(check : HTMLDivElement){
+        this.check = check;
+    }
+    set(name:string,informaition:string,is?:boolean): void{
+        this.check.childNodes[0].childNodes.item(0).textContent = name;
+        this.check.childNodes[0].childNodes.item(1).textContent = informaition;
+        if (is != undefined) {
+            if (is){
+                this.check.id = "true";
+            }
+            else {
+                this.check.id = "false";
+            }
+        }
+    }
+    setValue(is:boolean): void{
+        let struct = document.createElement("div"); 
+        if (is){
+            struct.innerHTML = modalHtml.checkOn;
+            let new_check = struct.childNodes.item(0) as HTMLDivElement;
+            new_check.childNodes.item(1).addEventListener(this.Event[0],this.Event[1]);
+            this.check.childNodes.item(1).remove();
+            this.check.appendChild(new_check.childNodes.item(1));
+            this.check.id = "true";
+        }
+        else{
+            struct.innerHTML = modalHtml.checkOff;
+            let new_check = struct.childNodes.item(0) as HTMLDivElement;
+            new_check.childNodes.item(1).addEventListener(this.Event[0],this.Event[1]);
+            this.check.childNodes.item(1).remove();
+            this.check.appendChild(new_check.childNodes.item(1));
+            this.check.id = "false";
+        }
+    }
+    getValue(): boolean{
+        if(this.check.id == "true"){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    setEventListener(type:string,func: EventListener){
+        this.check.childNodes.item(1).addEventListener(type,func);
+        this.Event = [type,func];
+    }
+
 }
 
 export class popup implements interfaces.popup{
@@ -78,5 +130,25 @@ export class popup implements interfaces.popup{
         this.middle.appendChild(new_label);
         this.middle.appendChild(new_textarea);
         return new popupElement(new_label,new_textarea);
+    }
+    addCheck(name: string,informaition:string, is:boolean){
+        var struct = document.createElement("div");
+        if (is){
+            struct.innerHTML = modalHtml.checkOn;
+        }
+        else{
+            struct.innerHTML = modalHtml.checkOff;
+        }
+        var new_check = struct.childNodes.item(0) as HTMLDivElement;
+        if (is){
+            new_check.id = "true";
+        }
+        else{
+            new_check.id = "false";
+        }
+        new_check.childNodes[0].childNodes.item(0).textContent = name;
+        new_check.childNodes[0].childNodes.item(1).textContent = informaition;
+        this.middle.appendChild(new_check);
+        return new popupCheckElement(new_check);
     }
 }

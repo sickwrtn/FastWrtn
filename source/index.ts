@@ -49,6 +49,14 @@ if (localStorage.getItem(env.local_them) == null){
     }))
 }
 
+//세팅 초기설정
+if (localStorage.getItem(env.loacl_setting) == null){
+    localStorage.setItem(env.loacl_setting,JSON.stringify({
+        plus:true,
+        fastfood:true,
+    }))
+}
+
 debug("localStorage");
 
 const wrtn: interfaces.wrtn_api_class = new wrtn_api_class();
@@ -217,51 +225,55 @@ const feed: interfaces.feed_class = new feed_class();
 //피드 기능
 if (true==true){
     // 패스트푸드 언셒
-    feed.add("데이터를 수집중",fastfood(true),false,(character) => {
-        if (new Date(character.createdAt).setHours(new Date(character.createdAt).getHours() + 12) < new Date().getTime()){
-            return true;
-        }
-    },(characters,feed,text)=>{
-        let i = 0;
-        let k: Array<[interfaces.character,any]> = []
-        for (const element of feed.childNodes) {
-            k[k.length] = [characters[i],element]
-            i++;
-        }
-        k.sort((a: [interfaces.character,any], b: [interfaces.character,any]) => {
-            return b[0].chatCount - a[0].chatCount;
-        })
-        characters = [];
-        for (const k_i of k) {
-            characters[characters.length] = k_i[0]; feed.appendChild(k_i[1])
-        }
-        text.textContent =  env.rankingFastfood + "(Fast wrtn) (unSafe)";
-    });
-    // 패스트푸드 언셒
-    feed.add("데이터를 수집중",fastfood(false),false,(character) => {
-        if (new Date(character.createdAt).setHours(new Date(character.createdAt).getHours() + 24) < new Date().getTime()){
-            return true;
-        }
-    },(characters,feed,text)=>{
-        let i = 0;
-        let k: Array<[interfaces.character,any]> = []
-        for (const element of feed.childNodes) {
-            k[k.length] = [characters[i],element]
-            i++;
-        }
-        k.sort((a: [interfaces.character,any], b: [interfaces.character,any]) => {
-            return b[0].chatCount - a[0].chatCount;
-        })
-        characters = [];
-        for (const k_i of k) {
-            characters[characters.length] = k_i[0]; feed.appendChild(k_i[1])
-        }
-        text.textContent = env.rankingFastfood + "(Fast wrtn) (Safe)";
-    });
-    // 비크리
-    feed.add(env.plus,filter_character_list(false),false);
-    // 크리
-    feed.add(env.plus,filter_character_list(true),true);
+    if(JSON.parse(localStorage.getItem(env.loacl_setting)).fastfood){
+        feed.add("데이터를 수집중",fastfood(true),false,(character) => {
+            if (new Date(character.createdAt).setHours(new Date(character.createdAt).getHours() + 12) < new Date().getTime()){
+                return true;
+            }
+        },(characters,feed,text)=>{
+            let i = 0;
+            let k: Array<[interfaces.character,any]> = []
+            for (const element of feed.childNodes) {
+                k[k.length] = [characters[i],element]
+                i++;
+            }
+            k.sort((a: [interfaces.character,any], b: [interfaces.character,any]) => {
+                return b[0].chatCount - a[0].chatCount;
+            })
+            characters = [];
+            for (const k_i of k) {
+                characters[characters.length] = k_i[0]; feed.appendChild(k_i[1])
+            }
+            text.textContent =  env.rankingFastfood + "(Fast wrtn) (unSafe)";
+        });
+        // 패스트푸드 언셒
+        feed.add("데이터를 수집중",fastfood(false),false,(character) => {
+            if (new Date(character.createdAt).setHours(new Date(character.createdAt).getHours() + 24) < new Date().getTime()){
+                return true;
+            }
+        },(characters,feed,text)=>{
+            let i = 0;
+            let k: Array<[interfaces.character,any]> = []
+            for (const element of feed.childNodes) {
+                k[k.length] = [characters[i],element]
+                i++;
+            }
+            k.sort((a: [interfaces.character,any], b: [interfaces.character,any]) => {
+                return b[0].chatCount - a[0].chatCount;
+            })
+            characters = [];
+            for (const k_i of k) {
+                characters[characters.length] = k_i[0]; feed.appendChild(k_i[1])
+            }
+            text.textContent = env.rankingFastfood + "(Fast wrtn) (Safe)";
+        });
+    }
+    if(JSON.parse(localStorage.getItem(env.loacl_setting)).plus){
+        // 비크리
+        feed.add(env.plus,filter_character_list(false),false);
+        // 크리
+        feed.add(env.plus,filter_character_list(true),true);
+    }
     //피드에 새로운 기능을 추가할경우
     /*
     feed.add(이름, interfaces.filter_character_list의 형식을 만족하는 필러링 함수, 크리딱지를 붙일건지 (캐챗말고 이름 옆에));
