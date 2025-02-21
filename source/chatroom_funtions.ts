@@ -8,6 +8,7 @@ import * as env from "./.env/env";
 import * as interfaces from "./interface/interfaces";
 import { popup } from "./tools/popup";
 import { compileNoNCss } from "./Fast Css/compiler";
+import { cssApply, cssNoIntervalApply, directCssApply } from "./Fast Css/apply";
 
 const wrtn: interfaces.wrtn_api_class = new wrtn_api_class();
 
@@ -278,8 +279,16 @@ export function custumThem():void {
     const them_popup = new popup("커스텀 테마");
     them_popup.open();
     them_popup.setClose("닫기",()=>{
-        them_popup.close();
         clearInterval(directEntry);
+        clearInterval(directApply);
+        if (document.getElementById("ThemCssInit") != null){
+            document.getElementById("ThemCssInit").remove();
+        }
+        if (document.getElementById("ThemCss") != null){
+            document.getElementById("ThemCss").remove();
+        }
+        cssNoIntervalApply();
+        them_popup.close();
     });
     them_popup.setSumbit("적용", ()=>{
         localStorage.setItem(env.local_them,JSON.stringify({
@@ -287,6 +296,7 @@ export function custumThem():void {
         }));
         alert("css가 적용되었습니다!");
         clearInterval(directEntry);
+        clearInterval(directApply);
         them_popup.close();
         window.location.reload();
     })
@@ -294,7 +304,30 @@ export function custumThem():void {
     css.setValue(JSON.parse(localStorage.getItem(env.local_them)).css);
     const css2 = them_popup.addTextarea("compiled Fast Css","","유효성을 검사하세요!",undefined,300);
     css2.textarea.setAttribute("disabled",null);
+    const check = them_popup.addCheck("DirectlyApply","Css 실시간 적용 (저장은 적용 버튼 눌러야함)",false);
+    check.setEventListener('click',()=>{
+        if(check.getValue()){
+            check.setValue(false);
+        }
+        else{
+            check.setValue(true);
+        }
+    })
     let directEntry = setInterval(()=>{
         css2.setValue(compileNoNCss(css.getValue()));
-    })
+    },100)
+    let directApply = setInterval(()=>{
+        if (check.getValue()){
+            directCssApply(css.getValue());
+        }
+        else{
+            if (document.getElementById("ThemCssInit") != null){
+                document.getElementById("ThemCssInit").remove();
+            }
+            if (document.getElementById("ThemCss") != null){
+                document.getElementById("ThemCss").remove();
+            }
+            cssNoIntervalApply();
+        }
+    },100)
 }
