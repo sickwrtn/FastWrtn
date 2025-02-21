@@ -271,7 +271,7 @@ export function persona_change(menus){
         persona_div.appendChild(personaL);
         c++;
     }
-    tools.insertAfter(menus.menu,menus.get(env.persona_name),persona_div);
+    tools.insertAfter(document.getElementsByClassName("css-uxwch2").item(0),document.getElementsByClassName("css-uxwch2").item(0).childNodes.item(3),persona_div);
     debug("persona",0);
 }
 
