@@ -67,5 +67,5 @@ export function main(feed: interfaces.feed_class,menus: interfaces.chatroom_menu
             }
         }
         lastest = document.URL;
-    },500)
+    })
 }

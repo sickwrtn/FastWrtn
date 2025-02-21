@@ -47,7 +47,7 @@ export class chatroom_menus_class implements interfaces.chatroom_menus_class{
 function myDropdown(tipbar: HTMLCollectionOf<Element>,tipbar_struct_I: HTMLButtonElement,textContent: string,selected: number,func: interfaces.onClickDropdown): void | true{
     tipbar_struct_I.childNodes.item(0).textContent = textContent;
     tipbar_struct_I.addEventListener("click",()=> {
-        console.log(selected);
+        debug(`selected ${selected}`);
         debug(`tipbar_struct`,3);
         if (confirm("진짜 계속 진행 하시겠습니까?")){
             load_in_cursor("",[],wrtn,"my",(my_character_list: Array<interfaces.myCharacter>)=>{
