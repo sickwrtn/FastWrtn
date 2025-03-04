@@ -1,5 +1,4 @@
 ![](https://img.shields.io/chrome-web-store/rating/lmahnfafkefebiibmcdnnopdojipbonh?logo=chromewebstore)
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=sickwrtn)](https://github.com/anuraghazra/github-readme-stats)
 # FastWrtn Dev Version
 뤼튼 편의성 개선 확장 프로그램 개발자 버전
 # 사용법
