@@ -1,5 +1,5 @@
-![](https://img.shields.io/chrome-web-store/rating/lmahnfafkefebiibmcdnnopdojipbonh?logo=chromewebstore)
-![](https://img.shields.io/chrome-web-store/v/lmahnfafkefebiibmcdnnopdojipbonh)
+[![](https://img.shields.io/chrome-web-store/rating/lmahnfafkefebiibmcdnnopdojipbonh?logo=chromewebstore)](https://chromewebstore.google.com/detail/fast-wrtn/lmahnfafkefebiibmcdnnopdojipbonh)
+[![](https://img.shields.io/chrome-web-store/v/lmahnfafkefebiibmcdnnopdojipbonh)](https://chromewebstore.google.com/detail/fast-wrtn/lmahnfafkefebiibmcdnnopdojipbonh/reviews?hl=en&utm_source=ext_sidebar)
 # FastWrtn Dev Version
 뤼튼 편의성 개선 확장 프로그램 개발자 버전
 # 사용법
