@@ -1,3 +1,5 @@
+![icon-128x128](https://github.com/user-attachments/assets/2b3ae256-8075-424f-8741-516f7119133c)
+
 [![](https://img.shields.io/chrome-web-store/users/lmahnfafkefebiibmcdnnopdojipbonh)](https://chromewebstore.google.com/detail/fast-wrtn/lmahnfafkefebiibmcdnnopdojipbonh)
 [![](https://img.shields.io/chrome-web-store/v/lmahnfafkefebiibmcdnnopdojipbonh)](https://chromewebstore.google.com/detail/fast-wrtn/lmahnfafkefebiibmcdnnopdojipbonh)
 [![](https://img.shields.io/chrome-web-store/rating/lmahnfafkefebiibmcdnnopdojipbonh?logo=chromewebstore)](https://chromewebstore.google.com/detail/fast-wrtn/lmahnfafkefebiibmcdnnopdojipbonh/reviews?hl=en&utm_source=ext_sidebar)
