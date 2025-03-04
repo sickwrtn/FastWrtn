@@ -1,3 +1,4 @@
+[![](https://img.shields.io/chrome-web-store/users/lmahnfafkefebiibmcdnnopdojipbonh)](https://chromewebstore.google.com/detail/fast-wrtn/lmahnfafkefebiibmcdnnopdojipbonh)
 [![](https://img.shields.io/chrome-web-store/v/lmahnfafkefebiibmcdnnopdojipbonh)](https://chromewebstore.google.com/detail/fast-wrtn/lmahnfafkefebiibmcdnnopdojipbonh)
 [![](https://img.shields.io/chrome-web-store/rating/lmahnfafkefebiibmcdnnopdojipbonh?logo=chromewebstore)](https://chromewebstore.google.com/detail/fast-wrtn/lmahnfafkefebiibmcdnnopdojipbonh/reviews?hl=en&utm_source=ext_sidebar)
 # FastWrtn Dev Version
