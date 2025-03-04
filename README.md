@@ -1,8 +1,14 @@
-![icon-128x128](https://github.com/user-attachments/assets/2b3ae256-8075-424f-8741-516f7119133c)
 
-[![](https://img.shields.io/chrome-web-store/users/lmahnfafkefebiibmcdnnopdojipbonh)](https://chromewebstore.google.com/detail/fast-wrtn/lmahnfafkefebiibmcdnnopdojipbonh)
-[![](https://img.shields.io/chrome-web-store/v/lmahnfafkefebiibmcdnnopdojipbonh)](https://chromewebstore.google.com/detail/fast-wrtn/lmahnfafkefebiibmcdnnopdojipbonh)
-[![](https://img.shields.io/chrome-web-store/rating/lmahnfafkefebiibmcdnnopdojipbonh?logo=chromewebstore)](https://chromewebstore.google.com/detail/fast-wrtn/lmahnfafkefebiibmcdnnopdojipbonh/reviews?hl=en&utm_source=ext_sidebar)
+<p align="center">
+    <img src="https://github.com/user-attachments/assets/2b3ae256-8075-424f-8741-516f7119133c" width="200px"/>
+    <br>
+    <br>
+    <img src="https://img.shields.io/chrome-web-store/users/lmahnfafkefebiibmcdnnopdojipbonh">
+    <img src="https://img.shields.io/chrome-web-store/v/lmahnfafkefebiibmcdnnopdojipbonh">
+    <a href="https://chromewebstore.google.com/detail/fast-wrtn/lmahnfafkefebiibmcdnnopdojipbonh" target="_blank">
+        <img src="https://img.shields.io/chrome-web-store/rating/lmahnfafkefebiibmcdnnopdojipbonh?logo=chromewebstore">
+    </a>
+</p>
 # FastWrtn Dev Version
 뤼튼 편의성 개선 확장 프로그램 개발자 버전
 # 사용법
