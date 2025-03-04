@@ -9,6 +9,7 @@
         <img src="https://img.shields.io/chrome-web-store/rating/lmahnfafkefebiibmcdnnopdojipbonh?logo=chromewebstore">
     </a>
 </p>
+
 # FastWrtn Dev Version
 뤼튼 편의성 개선 확장 프로그램 개발자 버전
 # 사용법
